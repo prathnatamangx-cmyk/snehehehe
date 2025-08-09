@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -190,13 +190,19 @@
       justify-content: center;
       width: 100%;
       max-width: 700px;
+      border: 3px solid #ffccd9; /* soft pink border */
+      border-radius: 25px;
+      padding: 30px 20px;
+      box-sizing: border-box;
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 20px rgba(255, 204, 217, 0.4);
     }
 
     .active {
       display: flex;
     }
 
-    /* PAGE 3: LEGO heart background */
+    /* PAGE 3 emoji heart background */
     #page3 {
       position: relative;
       color: #ffee8c;
@@ -207,81 +213,23 @@
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      padding: 20px;
+      padding: 30px 20px;
       box-sizing: border-box;
       text-align: center;
     }
 
-    #lego-heart-container {
+    #emoji-heart-bg {
       position: absolute;
       top: 50%;
       left: 50%;
+      font-size: 14rem;
+      color: #ff4d6d;
+      opacity: 0.15;
       transform: translate(-50%, -50%);
-      width: 180px;
-      height: 180px;
-      z-index: 1;
       user-select: none;
       pointer-events: none;
-      animation: heartbeat 1.4s infinite ease-in-out;
-      filter: drop-shadow(0 0 8px #e63946);
-      opacity: 0.35;
-      border-radius: 20px;
+      z-index: 0;
     }
-
-    /* LEGO heart blocks */
-    .lego-block {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: #e63946;
-      border-radius: 4px;
-      box-shadow:
-        inset 0 0 3px #a62832,
-        0 2px 4px rgba(255,255,255,0.7);
-      transition: background 0.3s ease;
-    }
-
-    /* Highlights for the top of each block (to simulate LEGO shine) */
-    .lego-block::before {
-      content: '';
-      position: absolute;
-      top: 3px;
-      left: 3px;
-      width: 14px;
-      height: 14px;
-      background: radial-gradient(circle at center, rgba(255,255,255,0.8), transparent 70%);
-      border-radius: 3px;
-    }
-
-    /* Heartbeat animation */
-    @keyframes heartbeat {
-      0%, 100% {
-        transform: translate(-50%, -50%) scale(1);
-        filter: drop-shadow(0 0 8px #e63946);
-      }
-      50% {
-        transform: translate(-50%, -50%) scale(1.15);
-        filter: drop-shadow(0 0 20px #f94144);
-      }
-    }
-
-    /* Position blocks to form heart shape */
-    /* Using a pixel-art style 7x7 grid */
-    #lego-heart-container .block1 { top: 0; left: 20px; }
-    #lego-heart-container .block2 { top: 0; left: 40px; }
-    #lego-heart-container .block3 { top: 20px; left: 0; }
-    #lego-heart-container .block4 { top: 20px; left: 20px; }
-    #lego-heart-container .block5 { top: 20px; left: 40px; }
-    #lego-heart-container .block6 { top: 20px; left: 60px; }
-    #lego-heart-container .block7 { top: 40px; left: 0; }
-    #lego-heart-container .block8 { top: 40px; left: 20px; }
-    #lego-heart-container .block9 { top: 40px; left: 40px; }
-    #lego-heart-container .block10 { top: 40px; left: 60px; }
-    #lego-heart-container .block11 { top: 60px; left: 20px; }
-    #lego-heart-container .block12 { top: 60px; left: 40px; }
-    #lego-heart-container .block13 { top: 80px; left: 30px; }
-    #lego-heart-container .block14 { top: 80px; left: 50px; }
-
   </style>
 </head>
 <body>
@@ -292,11 +240,11 @@
   <!-- PAGE 1 -->
   <div id="page1" class="page active">
     <h1>hie meri bhondu girlfriend :)<br>here’s something cute for you</h1>
-    <button id="nextBtn1">Next</button>
+    <button id="nextBtn1" aria-label="Go to next page">Next</button>
   </div>
 
   <!-- PAGE 2 -->
-  <div id="page2" class="page">
+  <div id="page2" class="page" aria-hidden="true">
     <h2>Click Play</h2>
     <div class="video-container">
       <iframe src="https://www.youtube.com/embed/P0boBJvA_SQ?rel=0&autoplay=0"
@@ -305,33 +253,17 @@
               allowfullscreen></iframe>
     </div>
     <div>
-      <button id="backBtn2">Back</button>
-      <button id="nextBtn2">Next</button>
+      <button id="backBtn2" aria-label="Go back to previous page">Back</button>
+      <button id="nextBtn2" aria-label="Go to next page">Next</button>
     </div>
     <div id="closing-text">made with love, from bengi&lt;3</div>
   </div>
 
   <!-- PAGE 3 -->
-  <div id="page3" class="page">
+  <div id="page3" class="page" aria-hidden="true">
+    <div id="emoji-heart-bg" aria-hidden="true">❤️</div>
     <h3>I love you so much</h3>
-    <div id="lego-heart-container" aria-hidden="true">
-      <!-- LEGO blocks -->
-      <div class="lego-block block1"></div>
-      <div class="lego-block block2"></div>
-      <div class="lego-block block3"></div>
-      <div class="lego-block block4"></div>
-      <div class="lego-block block5"></div>
-      <div class="lego-block block6"></div>
-      <div class="lego-block block7"></div>
-      <div class="lego-block block8"></div>
-      <div class="lego-block block9"></div>
-      <div class="lego-block block10"></div>
-      <div class="lego-block block11"></div>
-      <div class="lego-block block12"></div>
-      <div class="lego-block block13"></div>
-      <div class="lego-block block14"></div>
-    </div>
-    <button id="backBtn3">Back</button>
+    <button id="backBtn3" aria-label="Go back to previous page">Back</button>
   </div>
 
   <script>
@@ -351,8 +283,12 @@
 
     // Navigation functions
     function showPage(pageToShow) {
-      [page1, page2, page3].forEach(p => p.classList.remove('active'));
+      [page1, page2, page3].forEach(p => {
+        p.classList.remove('active');
+        p.setAttribute('aria-hidden', 'true');
+      });
       pageToShow.classList.add('active');
+      pageToShow.removeAttribute('aria-hidden');
     }
 
     nextBtn1.addEventListener('click', () => showPage(page2));
