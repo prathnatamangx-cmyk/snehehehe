@@ -61,10 +61,12 @@
       user-select: none;
     }
 
-    button:hover {
+    button:hover,
+    button:focus {
       background: #e65171;
       transform: scale(1.1);
       animation-play-state: paused;
+      outline: none;
     }
 
     @keyframes bounce {
@@ -110,7 +112,7 @@
       user-select: none;
     }
 
-    /* Floating cute shapes container */
+    /* Floating hearts container */
     #floating-container {
       position: fixed;
       top: 0; left: 0;
@@ -121,43 +123,55 @@
       z-index: 1;
     }
 
-    /* Floating shape base style */
-    .floating-shape {
+    /* Heart SVG style */
+    .floating-heart {
       position: fixed;
-      font-size: 18px;
+      width: 24px;
+      height: 24px;
+      fill: #ffee8c; /* pastel yellow */
+      filter: drop-shadow(0 0 3px rgba(0,0,0,0.15));
       opacity: 0.85;
       user-select: none;
       animation-timing-function: ease-in-out;
       animation-iteration-count: infinite;
-      filter: drop-shadow(0 0 2px rgba(0,0,0,0.15));
+      cursor: default;
       will-change: transform, opacity;
-      color: #fff2a8; /* pastel yellow */
-      text-shadow: 0 0 6px #ffb6c1, 0 0 10px #f8b195;
+      transition: transform 0.3s ease;
       z-index: 1;
     }
 
-    /* Different floating animations */
-    @keyframes floatUpDown1 {
-      0% { transform: translateY(0) translateX(0); opacity: 0.8; }
-      50% { transform: translateY(-30px) translateX(8px); opacity: 1; }
-      100% { transform: translateY(0) translateX(0); opacity: 0.8; }
+    .floating-heart:hover,
+    .floating-heart:focus,
+    .floating-heart:active {
+      transform: scale(1.4) rotate(10deg);
+      filter: drop-shadow(0 0 6px #ffb6c1);
+      opacity: 1;
+      animation-play-state: paused;
+      outline: none;
     }
-    @keyframes floatUpDown2 {
-      0% { transform: translateY(0) translateX(0); opacity: 0.7; }
-      50% { transform: translateY(-40px) translateX(-6px); opacity: 1; }
-      100% { transform: translateY(0) translateX(0); opacity: 0.7; }
+
+    /* Floating animations with gentle sway & vertical movement */
+    @keyframes floatUpSway1 {
+      0%   { transform: translate(0, 0) rotate(0deg); opacity: 0.85; }
+      50%  { transform: translate(12px, -35px) rotate(15deg); opacity: 1; }
+      100% { transform: translate(0, 0) rotate(0deg); opacity: 0.85; }
     }
-    @keyframes floatUpDown3 {
-      0% { transform: translateY(0) translateX(0); opacity: 0.75; }
-      50% { transform: translateY(-25px) translateX(4px); opacity: 1; }
-      100% { transform: translateY(0) translateX(0); opacity: 0.75; }
+    @keyframes floatUpSway2 {
+      0%   { transform: translate(0, 0) rotate(0deg); opacity: 0.8; }
+      50%  { transform: translate(-10px, -40px) rotate(-10deg); opacity: 1; }
+      100% { transform: translate(0, 0) rotate(0deg); opacity: 0.8; }
+    }
+    @keyframes floatUpSway3 {
+      0%   { transform: translate(0, 0) rotate(0deg); opacity: 0.9; }
+      50%  { transform: translate(8px, -30px) rotate(8deg); opacity: 1; }
+      100% { transform: translate(0, 0) rotate(0deg); opacity: 0.9; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Floating shapes container -->
-  <div id="floating-container"></div>
+  <!-- Floating hearts container -->
+  <div id="floating-container" aria-hidden="true"></div>
 
   <!-- Page 1 -->
   <div id="page1">
@@ -183,6 +197,7 @@
     const page2 = document.getElementById('page2');
     const nextBtn = document.getElementById('nextBtn');
     const backBtn = document.getElementById('backBtn');
+    const floatingContainer = document.getElementById('floating-container');
 
     nextBtn.addEventListener('click', () => {
       page1.style.display = 'none';
@@ -194,45 +209,55 @@
       page1.style.display = 'flex';
     });
 
-    // Floating shapes (hearts & stars)
-    const floatingContainer = document.getElementById('floating-container');
-    const shapes = ['❤️', '⭐', '✨', '💛', '🌸', '💕'];
+    // SVG path for a cute heart shape
+    const heartSVG = `
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+          2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09
+          C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5
+          c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+      </svg>
+    `;
 
-    function createFloatingShape() {
-      const span = document.createElement('span');
-      span.classList.add('floating-shape');
+    // Different animation names to pick from
+    const animations = ['floatUpSway1', 'floatUpSway2', 'floatUpSway3'];
 
-      // Random shape emoji
-      span.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+    function createFloatingHeart() {
+      const div = document.createElement('div');
+      div.classList.add('floating-heart');
+      div.style.color = '#ffee8c'; // pastel yellow color
+
+      // Insert SVG inside div
+      div.innerHTML = heartSVG;
 
       // Random horizontal start position
-      span.style.left = Math.random() * window.innerWidth + 'px';
+      div.style.left = Math.random() * window.innerWidth + 'px';
 
-      // Random animation duration and delay
-      const duration = 4000 + Math.random() * 4000;
-      const delay = Math.random() * 4000;
+      // Random size between 14px and 28px
+      const size = 14 + Math.random() * 14;
+      div.style.width = size + 'px';
+      div.style.height = size + 'px';
+
+      // Random animation duration between 4s and 7s
+      const duration = 4000 + Math.random() * 3000;
 
       // Random animation choice
-      const anims = ['floatUpDown1', 'floatUpDown2', 'floatUpDown3'];
-      const anim = anims[Math.floor(Math.random() * anims.length)];
+      const anim = animations[Math.floor(Math.random() * animations.length)];
+      div.style.animation = `${anim} ${duration}ms ease-in-out infinite`;
 
-      span.style.animation = `${anim} ${duration}ms ease-in-out infinite`;
-      span.style.animationDelay = `${delay}ms`;
+      // Random animation delay so they float asynchronously
+      div.style.animationDelay = (Math.random() * 4000) + 'ms';
 
-      // Random size
-      const size = 14 + Math.random() * 14;
-      span.style.fontSize = size + 'px';
+      floatingContainer.appendChild(div);
 
-      floatingContainer.appendChild(span);
-
-      // Remove after animation cycles (~duration * 3 for safety)
+      // Remove heart after ~duration * 3 cycles (safety buffer)
       setTimeout(() => {
-        floatingContainer.removeChild(span);
+        floatingContainer.removeChild(div);
       }, duration * 3);
     }
 
-    // Spawn floating shapes frequently
-    setInterval(createFloatingShape, 300);
+    // Generate floating hearts every 350ms
+    setInterval(createFloatingHeart, 350);
   </script>
 
 </body>
