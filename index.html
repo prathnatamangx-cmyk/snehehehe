@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,113 +9,155 @@
   <link href="https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&display=swap" rel="stylesheet" />
 
   <style>
+    /* Background gradient */
     body {
       margin: 0;
-      background: #c7d9a4; /* pastel matcha green */
+      background: linear-gradient(135deg, #d7e9a8 0%, #a4c681 100%);
       font-family: 'Covered By Your Grace', cursive;
       color: #ffee8c;
       font-weight: 700;
-      height: 100vh;
+      min-height: 100vh;
       overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
       position: relative;
+      padding: 20px;
+      box-sizing: border-box;
+      text-align: center;
     }
 
+    /* Text headings */
     h1, h2 {
       color: #ffee8c;
       font-weight: 700;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
       margin-bottom: 2rem;
-      text-align: center;
-      z-index: 10;
-      position: relative;
+      font-size: 1.8rem;
+      max-width: 90vw;
     }
 
+    h2 {
+      font-size: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    /* Buttons with subtle bounce */
     button {
       background: #ff758f;
       color: white;
       border: none;
-      padding: 12px 30px;
+      padding: 15px 40px;
       border-radius: 30px;
-      font-size: 1.1rem;
+      font-size: 1.3rem;
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(255, 117, 143, 0.5);
-      transition: background 0.3s ease;
-      margin-top: 1rem;
+      box-shadow: 0 5px 15px rgba(255, 117, 143, 0.6);
+      transition: background 0.3s ease, transform 0.3s ease;
+      margin: 1rem 0;
       position: relative;
-      z-index: 10;
+      animation: bounce 2.5s infinite ease-in-out;
+      user-select: none;
     }
 
     button:hover {
       background: #e65171;
+      transform: scale(1.1);
+      animation-play-state: paused;
     }
 
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* Video container */
     .video-container {
       position: relative;
-      padding-bottom: 56.25%;
+      padding-bottom: 56.25%; /* 16:9 ratio */
       height: 0;
       overflow: hidden;
       max-width: 100%;
+      width: 95vw;
+      max-width: 600px;
       background: #000;
-      border-radius: 15px;
+      border-radius: 20px;
       box-shadow: 0 8px 20px rgba(214, 51, 108, 0.4);
-      z-index: 10;
-      position: relative;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .video-container iframe {
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       width: 100%;
       height: 100%;
-      border-radius: 15px;
+      border-radius: 20px;
     }
 
+    /* Closing text */
     #closing-text {
       margin-top: 2rem;
       font-family: 'Covered By Your Grace', cursive;
       color: #ffee8c;
       font-weight: 700;
-      font-size: 1.5rem;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.15);
-      text-align: center;
-      z-index: 10;
-      position: relative;
+      font-size: 1.6rem;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+      max-width: 90vw;
+      user-select: none;
     }
 
-    /* Flower doodle style */
-    .flower {
+    /* Floating cute shapes container */
+    #floating-container {
       position: fixed;
-      width: 20px;
-      height: 20px;
-      fill: white;
-      opacity: 0.8;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
       pointer-events: none;
-      animation-name: floatUp;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-      filter: drop-shadow(0 0 1px rgba(0,0,0,0.2));
-      z-index: 5;
+      overflow: visible;
+      z-index: 1;
     }
 
-    @keyframes floatUp {
-      0% {
-        transform: translateY(100vh) scale(0.5);
-        opacity: 0.8;
-      }
-      100% {
-        transform: translateY(-50px) scale(1);
-        opacity: 0;
-      }
+    /* Floating shape base style */
+    .floating-shape {
+      position: fixed;
+      font-size: 18px;
+      opacity: 0.85;
+      user-select: none;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      filter: drop-shadow(0 0 2px rgba(0,0,0,0.15));
+      will-change: transform, opacity;
+      color: #fff2a8; /* pastel yellow */
+      text-shadow: 0 0 6px #ffb6c1, 0 0 10px #f8b195;
+      z-index: 1;
+    }
+
+    /* Different floating animations */
+    @keyframes floatUpDown1 {
+      0% { transform: translateY(0) translateX(0); opacity: 0.8; }
+      50% { transform: translateY(-30px) translateX(8px); opacity: 1; }
+      100% { transform: translateY(0) translateX(0); opacity: 0.8; }
+    }
+    @keyframes floatUpDown2 {
+      0% { transform: translateY(0) translateX(0); opacity: 0.7; }
+      50% { transform: translateY(-40px) translateX(-6px); opacity: 1; }
+      100% { transform: translateY(0) translateX(0); opacity: 0.7; }
+    }
+    @keyframes floatUpDown3 {
+      0% { transform: translateY(0) translateX(0); opacity: 0.75; }
+      50% { transform: translateY(-25px) translateX(4px); opacity: 1; }
+      100% { transform: translateY(0) translateX(0); opacity: 0.75; }
     }
   </style>
 </head>
 <body>
+
+  <!-- Floating shapes container -->
+  <div id="floating-container"></div>
 
   <!-- Page 1 -->
   <div id="page1">
@@ -127,11 +169,12 @@
   <div id="page2" style="display:none;">
     <h2>Click Play</h2>
     <div class="video-container">
-      <iframe src="https://www.youtube.com/embed/P0boBJvA_SQ?rel=0&autoplay=0" 
-              title="Love Video" frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+      <iframe src="https://www.youtube.com/embed/P0boBJvA_SQ?rel=0&autoplay=0"
+              title="Love Video" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen></iframe>
     </div>
+    <button id="backBtn">Back</button>
     <div id="closing-text">made with love, from you bengi</div>
   </div>
 
@@ -139,28 +182,57 @@
     const page1 = document.getElementById('page1');
     const page2 = document.getElementById('page2');
     const nextBtn = document.getElementById('nextBtn');
+    const backBtn = document.getElementById('backBtn');
 
     nextBtn.addEventListener('click', () => {
       page1.style.display = 'none';
       page2.style.display = 'block';
     });
 
-    const flowerSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M12 2C10 5 7 4 7 4s-1 3 2 5-1 3-1 3 3 0 3-2 3-1 3-1-2-3-5-4z"/></svg>`;
+    backBtn.addEventListener('click', () => {
+      page2.style.display = 'none';
+      page1.style.display = 'flex';
+    });
 
-    function createFlower() {
-      const flower = document.createElement('div');
-      flower.classList.add('flower');
-      flower.style.left = Math.random() * window.innerWidth + 'px';
-      flower.style.animationDuration = (5 + Math.random() * 5) + 's';
-      flower.style.animationDelay = (Math.random() * 5) + 's';
-      flower.innerHTML = flowerSVG;
-      document.body.appendChild(flower);
+    // Floating shapes (hearts & stars)
+    const floatingContainer = document.getElementById('floating-container');
+    const shapes = ['❤️', '⭐', '✨', '💛', '🌸', '💕'];
+
+    function createFloatingShape() {
+      const span = document.createElement('span');
+      span.classList.add('floating-shape');
+
+      // Random shape emoji
+      span.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+
+      // Random horizontal start position
+      span.style.left = Math.random() * window.innerWidth + 'px';
+
+      // Random animation duration and delay
+      const duration = 4000 + Math.random() * 4000;
+      const delay = Math.random() * 4000;
+
+      // Random animation choice
+      const anims = ['floatUpDown1', 'floatUpDown2', 'floatUpDown3'];
+      const anim = anims[Math.floor(Math.random() * anims.length)];
+
+      span.style.animation = `${anim} ${duration}ms ease-in-out infinite`;
+      span.style.animationDelay = `${delay}ms`;
+
+      // Random size
+      const size = 14 + Math.random() * 14;
+      span.style.fontSize = size + 'px';
+
+      floatingContainer.appendChild(span);
+
+      // Remove after animation cycles (~duration * 3 for safety)
       setTimeout(() => {
-        flower.remove();
-      }, (parseFloat(flower.style.animationDuration) + parseFloat(flower.style.animationDelay)) * 1000);
+        floatingContainer.removeChild(span);
+      }, duration * 3);
     }
 
-    setInterval(createFlower, 500);
+    // Spawn floating shapes frequently
+    setInterval(createFloatingShape, 300);
   </script>
 
 </body>
