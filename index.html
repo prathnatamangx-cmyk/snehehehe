@@ -4,12 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>For My Bhondu Girlfriend</title>
-
-  <!-- Covered By Your Grace font from Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&display=swap" rel="stylesheet" />
-
   <style>
-    /* Background gradient */
+    /* General body + font + background */
     body {
       margin: 0;
       background: linear-gradient(135deg, #d7e9a8 0%, #a4c681 100%);
@@ -17,45 +14,54 @@
       color: #ffee8c;
       font-weight: 700;
       min-height: 100vh;
-      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
-      position: relative;
       padding: 20px;
       box-sizing: border-box;
-      text-align: center;
-    }
-
-    /* Text headings */
-    h1, h2, h3 {
-      color: #ffee8c;
-      font-weight: 700;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-      margin-bottom: 2rem;
-      max-width: 90vw;
       user-select: none;
     }
 
-    h1 {
-      font-size: 1.8rem;
+    /* Page container styling */
+    .page {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 700px;
+      min-height: 80vh;
+      border: 3px solid #ffccd9;
+      border-radius: 25px;
+      box-shadow: 0 0 20px rgba(255, 204, 217, 0.4);
+      padding: 30px;
+      text-align: center;
+      position: relative;
+      background: rgba(255, 255, 255, 0.05);
     }
 
-    h2 {
-      font-size: 1.5rem;
-      margin-top: 1rem;
+    /* Show active page */
+    .page.active {
+      display: flex;
     }
 
+    /* Headings */
+    h1, h2, h3 {
+      margin: 0 0 2rem 0;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+      color: #ffee8c;
+      font-weight: 700;
+    }
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.5rem; }
     h3 {
       font-size: 3.5rem;
       letter-spacing: 0.05em;
       line-height: 1.1;
       position: relative;
-      z-index: 3;
-      margin-top: 0;
+      z-index: 2;
+      margin-bottom: 3rem;
       text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
-      background: transparent;
     }
 
     /* Buttons with subtle bounce */
@@ -70,20 +76,17 @@
       cursor: pointer;
       box-shadow: 0 5px 15px rgba(255, 117, 143, 0.6);
       transition: background 0.3s ease, transform 0.3s ease;
-      margin: 1rem 0;
-      position: relative;
+      margin: 1rem 0.5rem 0 0.5rem;
       animation: bounce 2.5s infinite ease-in-out;
       user-select: none;
+      z-index: 10;
     }
-
-    button:hover,
-    button:focus {
+    button:hover, button:focus {
       background: #e65171;
       transform: scale(1.1);
       animation-play-state: paused;
       outline: none;
     }
-
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-8px); }
@@ -101,12 +104,8 @@
       background: #000;
       border-radius: 20px;
       box-shadow: 0 8px 20px rgba(214, 51, 108, 0.4);
-      margin: 0 auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      margin-bottom: 2rem;
     }
-
     .video-container iframe {
       position: absolute;
       top: 0; left: 0;
@@ -115,16 +114,26 @@
       border-radius: 20px;
     }
 
-    /* Closing text */
+    /* Closing text on page 2 */
     #closing-text {
-      margin-top: 2rem;
-      font-family: 'Covered By Your Grace', cursive;
-      color: #ffee8c;
-      font-weight: 700;
       font-size: 1.6rem;
       text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
-      max-width: 90vw;
+      color: #ffee8c;
+      font-weight: 700;
+      margin-top: 1rem;
+    }
+
+    /* Big heart background for page 3 */
+    #emoji-heart-bg {
+      position: absolute;
+      top: 50%; left: 50%;
+      font-size: 14rem;
+      color: #ff4d6d;
+      opacity: 0.15;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
       user-select: none;
+      z-index: 1;
     }
 
     /* Floating hearts container */
@@ -135,7 +144,7 @@
       height: 100vh;
       pointer-events: none;
       overflow: visible;
-      z-index: 1;
+      z-index: 0;
     }
 
     /* Floating heart SVG style */
@@ -146,13 +155,13 @@
       fill: #ffee8c; /* pastel yellow */
       filter: drop-shadow(0 0 3px rgba(0,0,0,0.15));
       opacity: 0.85;
-      user-select: none;
       animation-timing-function: ease-in-out;
       animation-iteration-count: infinite;
       cursor: default;
       will-change: transform, opacity;
       transition: transform 0.3s ease;
-      z-index: 1;
+      user-select: none;
+      z-index: 0;
     }
 
     .floating-heart:hover,
@@ -181,74 +190,26 @@
       50%  { transform: translate(8px, -30px) rotate(8deg); opacity: 1; }
       100% { transform: translate(0, 0) rotate(0deg); opacity: 0.9; }
     }
-
-    /* Page container styling */
-    .page {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      max-width: 700px;
-      border: 3px solid #ffccd9; /* soft pink border */
-      border-radius: 25px;
-      padding: 30px 20px;
-      box-sizing: border-box;
-      background: rgba(255, 255, 255, 0.1);
-      box-shadow: 0 0 20px rgba(255, 204, 217, 0.4);
-    }
-
-    .active {
-      display: flex;
-    }
-
-    /* PAGE 3 emoji heart background */
-    #page3 {
-      position: relative;
-      color: #ffee8c;
-      font-family: 'Covered By Your Grace', cursive;
-      user-select: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 30px 20px;
-      box-sizing: border-box;
-      text-align: center;
-    }
-
-    #emoji-heart-bg {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      font-size: 14rem;
-      color: #ff4d6d;
-      opacity: 0.15;
-      transform: translate(-50%, -50%);
-      user-select: none;
-      pointer-events: none;
-      z-index: 0;
-    }
   </style>
 </head>
 <body>
 
-  <!-- Floating hearts container -->
+  <!-- Floating hearts -->
   <div id="floating-container" aria-hidden="true"></div>
 
-  <!-- PAGE 1 -->
-  <div id="page1" class="page active">
+  <!-- Page 1 -->
+  <div id="page1" class="page active" role="main" aria-label="Welcome page">
     <h1>hie meri bhondu girlfriend :)<br>here’s something cute for you</h1>
     <button id="nextBtn1" aria-label="Go to next page">Next</button>
   </div>
 
-  <!-- PAGE 2 -->
-  <div id="page2" class="page" aria-hidden="true">
+  <!-- Page 2 -->
+  <div id="page2" class="page" role="main" aria-label="Video page">
     <h2>Click Play</h2>
     <div class="video-container">
       <iframe src="https://www.youtube.com/embed/P0boBJvA_SQ?rel=0&autoplay=0"
-              title="Love Video" frameborder="0"
+              title="Love Video"
+              frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen></iframe>
     </div>
@@ -259,36 +220,28 @@
     <div id="closing-text">made with love, from bengi&lt;3</div>
   </div>
 
-  <!-- PAGE 3 -->
-  <div id="page3" class="page" aria-hidden="true">
+  <!-- Page 3 -->
+  <div id="page3" class="page" role="main" aria-label="Love message page">
     <div id="emoji-heart-bg" aria-hidden="true">❤️</div>
     <h3>I love you so much</h3>
     <button id="backBtn3" aria-label="Go back to previous page">Back</button>
   </div>
 
   <script>
-    // Pages
     const page1 = document.getElementById('page1');
     const page2 = document.getElementById('page2');
     const page3 = document.getElementById('page3');
 
-    // Buttons
     const nextBtn1 = document.getElementById('nextBtn1');
     const backBtn2 = document.getElementById('backBtn2');
     const nextBtn2 = document.getElementById('nextBtn2');
     const backBtn3 = document.getElementById('backBtn3');
 
-    // Floating hearts container
-    const floatingContainer = document.getElementById('floating-container');
-
-    // Navigation functions
-    function showPage(pageToShow) {
-      [page1, page2, page3].forEach(p => {
-        p.classList.remove('active');
-        p.setAttribute('aria-hidden', 'true');
-      });
-      pageToShow.classList.add('active');
-      pageToShow.removeAttribute('aria-hidden');
+    // Function to show a page and hide others
+    function showPage(page) {
+      [page1, page2, page3].forEach(p => p.classList.remove('active'));
+      page.classList.add('active');
+      window.scrollTo(0, 0);
     }
 
     nextBtn1.addEventListener('click', () => showPage(page2));
@@ -296,23 +249,22 @@
     nextBtn2.addEventListener('click', () => showPage(page3));
     backBtn3.addEventListener('click', () => showPage(page2));
 
-    // SVG heart shape for floating hearts
+    // Floating hearts creation and animation
+    const floatingContainer = document.getElementById('floating-container');
     const heartSVG = `
       <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
           2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09
           C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5
           c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-      </svg>
-    `;
+      </svg>`;
 
-    // Floating heart animations
     const animations = ['floatUpSway1', 'floatUpSway2', 'floatUpSway3'];
 
     function createFloatingHeart() {
       const div = document.createElement('div');
       div.classList.add('floating-heart');
-      div.style.color = '#ffee8c'; // pastel yellow color
+      div.style.color = '#ffee8c';
       div.innerHTML = heartSVG;
 
       div.style.left = Math.random() * window.innerWidth + 'px';
