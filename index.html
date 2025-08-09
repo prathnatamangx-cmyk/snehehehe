@@ -118,3 +118,287 @@
     /* Closing text */
     #closing-text {
       margin-top: 2rem;
+      font-family: 'Covered By Your Grace', cursive;
+      color: #ffee8c;
+      font-weight: 700;
+      font-size: 1.6rem;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+      max-width: 90vw;
+      user-select: none;
+    }
+
+    /* Floating hearts container */
+    #floating-container {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      overflow: visible;
+      z-index: 1;
+    }
+
+    /* Floating heart SVG style */
+    .floating-heart {
+      position: fixed;
+      width: 24px;
+      height: 24px;
+      fill: #ffee8c; /* pastel yellow */
+      filter: drop-shadow(0 0 3px rgba(0,0,0,0.15));
+      opacity: 0.85;
+      user-select: none;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      cursor: default;
+      will-change: transform, opacity;
+      transition: transform 0.3s ease;
+      z-index: 1;
+    }
+
+    .floating-heart:hover,
+    .floating-heart:focus,
+    .floating-heart:active {
+      transform: scale(1.4) rotate(10deg);
+      filter: drop-shadow(0 0 6px #ffb6c1);
+      opacity: 1;
+      animation-play-state: paused;
+      outline: none;
+    }
+
+    /* Floating animations */
+    @keyframes floatUpSway1 {
+      0%   { transform: translate(0, 0) rotate(0deg); opacity: 0.85; }
+      50%  { transform: translate(12px, -35px) rotate(15deg); opacity: 1; }
+      100% { transform: translate(0, 0) rotate(0deg); opacity: 0.85; }
+    }
+    @keyframes floatUpSway2 {
+      0%   { transform: translate(0, 0) rotate(0deg); opacity: 0.8; }
+      50%  { transform: translate(-10px, -40px) rotate(-10deg); opacity: 1; }
+      100% { transform: translate(0, 0) rotate(0deg); opacity: 0.8; }
+    }
+    @keyframes floatUpSway3 {
+      0%   { transform: translate(0, 0) rotate(0deg); opacity: 0.9; }
+      50%  { transform: translate(8px, -30px) rotate(8deg); opacity: 1; }
+      100% { transform: translate(0, 0) rotate(0deg); opacity: 0.9; }
+    }
+
+    /* Page container styling */
+    .page {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 700px;
+    }
+
+    .active {
+      display: flex;
+    }
+
+    /* PAGE 3: LEGO heart background */
+    #page3 {
+      position: relative;
+      color: #ffee8c;
+      font-family: 'Covered By Your Grace', cursive;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    #lego-heart-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 180px;
+      height: 180px;
+      z-index: 1;
+      user-select: none;
+      pointer-events: none;
+      animation: heartbeat 1.4s infinite ease-in-out;
+      filter: drop-shadow(0 0 8px #e63946);
+      opacity: 0.35;
+      border-radius: 20px;
+    }
+
+    /* LEGO heart blocks */
+    .lego-block {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #e63946;
+      border-radius: 4px;
+      box-shadow:
+        inset 0 0 3px #a62832,
+        0 2px 4px rgba(255,255,255,0.7);
+      transition: background 0.3s ease;
+    }
+
+    /* Highlights for the top of each block (to simulate LEGO shine) */
+    .lego-block::before {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 14px;
+      height: 14px;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.8), transparent 70%);
+      border-radius: 3px;
+    }
+
+    /* Heartbeat animation */
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        filter: drop-shadow(0 0 8px #e63946);
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.15);
+        filter: drop-shadow(0 0 20px #f94144);
+      }
+    }
+
+    /* Position blocks to form heart shape */
+    /* Using a pixel-art style 7x7 grid */
+    #lego-heart-container .block1 { top: 0; left: 20px; }
+    #lego-heart-container .block2 { top: 0; left: 40px; }
+    #lego-heart-container .block3 { top: 20px; left: 0; }
+    #lego-heart-container .block4 { top: 20px; left: 20px; }
+    #lego-heart-container .block5 { top: 20px; left: 40px; }
+    #lego-heart-container .block6 { top: 20px; left: 60px; }
+    #lego-heart-container .block7 { top: 40px; left: 0; }
+    #lego-heart-container .block8 { top: 40px; left: 20px; }
+    #lego-heart-container .block9 { top: 40px; left: 40px; }
+    #lego-heart-container .block10 { top: 40px; left: 60px; }
+    #lego-heart-container .block11 { top: 60px; left: 20px; }
+    #lego-heart-container .block12 { top: 60px; left: 40px; }
+    #lego-heart-container .block13 { top: 80px; left: 30px; }
+    #lego-heart-container .block14 { top: 80px; left: 50px; }
+
+  </style>
+</head>
+<body>
+
+  <!-- Floating hearts container -->
+  <div id="floating-container" aria-hidden="true"></div>
+
+  <!-- PAGE 1 -->
+  <div id="page1" class="page active">
+    <h1>hie meri bhondu girlfriend :)<br>here’s something cute for you</h1>
+    <button id="nextBtn1">Next</button>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div id="page2" class="page">
+    <h2>Click Play</h2>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/P0boBJvA_SQ?rel=0&autoplay=0"
+              title="Love Video" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+    </div>
+    <div>
+      <button id="backBtn2">Back</button>
+      <button id="nextBtn2">Next</button>
+    </div>
+    <div id="closing-text">made with love, from bengi&lt;3</div>
+  </div>
+
+  <!-- PAGE 3 -->
+  <div id="page3" class="page">
+    <h3>I love you so much</h3>
+    <div id="lego-heart-container" aria-hidden="true">
+      <!-- LEGO blocks -->
+      <div class="lego-block block1"></div>
+      <div class="lego-block block2"></div>
+      <div class="lego-block block3"></div>
+      <div class="lego-block block4"></div>
+      <div class="lego-block block5"></div>
+      <div class="lego-block block6"></div>
+      <div class="lego-block block7"></div>
+      <div class="lego-block block8"></div>
+      <div class="lego-block block9"></div>
+      <div class="lego-block block10"></div>
+      <div class="lego-block block11"></div>
+      <div class="lego-block block12"></div>
+      <div class="lego-block block13"></div>
+      <div class="lego-block block14"></div>
+    </div>
+    <button id="backBtn3">Back</button>
+  </div>
+
+  <script>
+    // Pages
+    const page1 = document.getElementById('page1');
+    const page2 = document.getElementById('page2');
+    const page3 = document.getElementById('page3');
+
+    // Buttons
+    const nextBtn1 = document.getElementById('nextBtn1');
+    const backBtn2 = document.getElementById('backBtn2');
+    const nextBtn2 = document.getElementById('nextBtn2');
+    const backBtn3 = document.getElementById('backBtn3');
+
+    // Floating hearts container
+    const floatingContainer = document.getElementById('floating-container');
+
+    // Navigation functions
+    function showPage(pageToShow) {
+      [page1, page2, page3].forEach(p => p.classList.remove('active'));
+      pageToShow.classList.add('active');
+    }
+
+    nextBtn1.addEventListener('click', () => showPage(page2));
+    backBtn2.addEventListener('click', () => showPage(page1));
+    nextBtn2.addEventListener('click', () => showPage(page3));
+    backBtn3.addEventListener('click', () => showPage(page2));
+
+    // SVG heart shape for floating hearts
+    const heartSVG = `
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+          2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09
+          C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5
+          c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+      </svg>
+    `;
+
+    // Floating heart animations
+    const animations = ['floatUpSway1', 'floatUpSway2', 'floatUpSway3'];
+
+    function createFloatingHeart() {
+      const div = document.createElement('div');
+      div.classList.add('floating-heart');
+      div.style.color = '#ffee8c'; // pastel yellow color
+      div.innerHTML = heartSVG;
+
+      div.style.left = Math.random() * window.innerWidth + 'px';
+
+      const size = 14 + Math.random() * 14;
+      div.style.width = size + 'px';
+      div.style.height = size + 'px';
+
+      const duration = 4000 + Math.random() * 3000;
+      const anim = animations[Math.floor(Math.random() * animations.length)];
+      div.style.animation = `${anim} ${duration}ms ease-in-out infinite`;
+      div.style.animationDelay = (Math.random() * 4000) + 'ms';
+
+      floatingContainer.appendChild(div);
+
+      setTimeout(() => {
+        floatingContainer.removeChild(div);
+      }, duration * 3);
+    }
+
+    setInterval(createFloatingHeart, 350);
+  </script>
+
+</body>
+</html>
