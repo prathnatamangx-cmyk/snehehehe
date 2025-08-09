@@ -3,144 +3,250 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hi mere bhondu girlfriend :)</title>
-
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
-
+  <title>For My Bhondu Girlfriend</title>
+  <link href="https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&display=swap" rel="stylesheet" />
   <style>
+    /* General body + font + background */
     body {
       margin: 0;
+      background: linear-gradient(135deg, #d7e9a8 0%, #a4c681 100%);
+      font-family: 'Covered By Your Grace', cursive;
+      color: #ffee8c;
+      font-weight: 700;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       padding: 20px;
-      background: #fff4f7;
-      font-family: 'Share Tech Mono', monospace;
-      text-align: center;
-      overflow-x: hidden;
-      position: relative;
-      color: #4F4F4F;
+      box-sizing: border-box;
+      user-select: none;
     }
 
-    h1 {
-      font-weight: normal;
-      font-size: 2rem;
-      color: #6B8E23;
-      z-index: 1;
-      position: relative;
-      margin-bottom: 25px;
-    }
-
-    p {
-      font-weight: bold;
-      font-size: 1.2rem;
-      margin-top: 25px;
-      z-index: 1;
-      position: relative;
-    }
-
-    /* Responsive video container */
-    .video-wrapper {
-      position: relative;
-      width: 90%;
+    /* Page container styling */
+    .page {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
       max-width: 700px;
-      margin: 0 auto;
-      padding-bottom: 56.25%; /* 16:9 aspect ratio */
-      height: 0;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 0 15px rgba(0,0,0,0.15);
+      min-height: 80vh;
+      border: 3px solid #ffccd9;
+      border-radius: 25px;
+      box-shadow: 0 0 20px rgba(255, 204, 217, 0.4);
+      padding: 30px;
+      text-align: center;
+      position: relative;
+      background: rgba(255, 255, 255, 0.05);
     }
 
-    .video-wrapper iframe {
+    /* Show active page */
+    .page.active {
+      display: flex;
+    }
+
+    /* Headings */
+    h1, h2, h3 {
+      margin: 0 0 2rem 0;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+      color: #ffee8c;
+      font-weight: 700;
+    }
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.5rem; }
+    h3 {
+      font-size: 3.5rem;
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 3rem;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+    }
+
+    /* Buttons with subtle bounce */
+    button {
+      background: #ff758f;
+      color: white;
+      border: none;
+      padding: 15px 40px;
+      border-radius: 30px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(255, 117, 143, 0.6);
+      transition: background 0.3s ease, transform 0.3s ease;
+      margin: 1rem 0.5rem 0 0.5rem;
+      animation: bounce 2.5s infinite ease-in-out;
+      user-select: none;
+      z-index: 10;
+    }
+    button:hover, button:focus {
+      background: #e65171;
+      transform: scale(1.1);
+      animation-play-state: paused;
+      outline: none;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* Video container */
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 ratio */
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+      width: 95vw;
+      max-width: 600px;
+      background: #000;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(214, 51, 108, 0.4);
+      margin-bottom: 2rem;
+    }
+    .video-container iframe {
       position: absolute;
       top: 0; left: 0;
       width: 100%;
       height: 100%;
-      border: 0;
-      border-radius: 15px;
+      border-radius: 20px;
     }
 
-    .frogs {
-      position: fixed;
-      pointer-events: none;
-      width: 80px;
-      z-index: 2;
+    /* Closing text on page 2 */
+    #closing-text {
+      font-size: 1.6rem;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+      color: #ffee8c;
+      font-weight: 700;
+      margin-top: 1rem;
     }
 
-    .frog-top-left { top: 10px; left: 10px; }
-    .frog-top-right { top: 10px; right: 10px; }
-    .frog-bottom-left { bottom: 10px; left: 10px; }
-    .frog-bottom-right { bottom: 10px; right: 10px; }
-
-    .heart-container {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
+    /* Big heart background for page 3 */
+    #emoji-heart-bg {
+      position: absolute;
+      top: 50%; left: 50%;
+      font-size: 14rem;
+      color: #ff4d6d;
+      opacity: 0.15;
+      transform: translate(-50%, -50%);
       pointer-events: none;
-      overflow: hidden;
+      user-select: none;
+      z-index: 1;
+    }
+
+    /* Floating hearts container */
+    #floating-container {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      overflow: visible;
       z-index: 0;
     }
 
-    .heart {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: url('d4950292-a4a8-4365-8897-e44aae01200a.jpeg') no-repeat center/contain;
-      opacity: 0.8;
-      animation: floatUp linear infinite;
+    /* Floating heart SVG style */
+    .floating-heart {
+      position: fixed;
+      width: 24px;
+      height: 24px;
+      fill: #ffee8c; /* pastel yellow */
+      filter: drop-shadow(0 0 3px rgba(0,0,0,0.15));
+      opacity: 0.85;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      cursor: default;
+      will-change: transform, opacity;
+      transition: transform 0.3s ease;
+      user-select: none;
+      z-index: 0;
     }
 
-    @keyframes floatUp {
-      0% {
-        transform: translateY(100vh) scale(1);
-        opacity: 0.8;
-      }
-      100% {
-        transform: translateY(-20vh) scale(1.3);
-        opacity: 0;
-      }
+    .floating-heart:hover,
+    .floating-heart:focus,
+    .floating-heart:active {
+      transform: scale(1.4) rotate(10deg);
+      filter: drop-shadow(0 0 6px #ffb6c1);
+      opacity: 1;
+      animation-play-state: paused;
+      outline: none;
+    }
+
+    /* Floating animations */
+    @keyframes floatUpSway1 {
+      0%   { transform: translate(0, 0) rotate(0deg); opacity: 0.85; }
+      50%  { transform: translate(12px, -35px) rotate(15deg); opacity: 1; }
+      100% { transform: translate(0, 0) rotate(0deg); opacity: 0.85; }
+    }
+    @keyframes floatUpSway2 {
+      0%   { transform: translate(0, 0) rotate(0deg); opacity: 0.8; }
+      50%  { transform: translate(-10px, -40px) rotate(-10deg); opacity: 1; }
+      100% { transform: translate(0, 0) rotate(0deg); opacity: 0.8; }
+    }
+    @keyframes floatUpSway3 {
+      0%   { transform: translate(0, 0) rotate(0deg); opacity: 0.9; }
+      50%  { transform: translate(8px, -30px) rotate(8deg); opacity: 1; }
+      100% { transform: translate(0, 0) rotate(0deg); opacity: 0.9; }
     }
   </style>
 </head>
 <body>
 
-  <h1>Hi mere bhondu girlfriend :) here's something cute for you</h1>
+  <!-- Floating hearts -->
+  <div id="floating-container" aria-hidden="true"></div>
 
-  <!-- YouTube video embed -->
-  <div class="video-wrapper">
-    <iframe
-      src="https://www.youtube.com/embed/VhRtLxfTMWI"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
-      title="Cute video for my girlfriend"
-    ></iframe>
+  <!-- Page 1 -->
+  <div id="page1" class="page active" role="main" aria-label="Welcome page">
+    <h1>hie meri bhondu girlfriend :)<br>here’s something cute for you</h1>
+    <button id="nextBtn1" aria-label="Go to next page">Next</button>
   </div>
 
-  <p>Made with love, from your bengi 🐸💚</p>
+  <!-- Page 2 -->
+  <div id="page2" class="page" role="main" aria-label="Video page">
+    <h2>Click Play</h2>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/VhRtLxfTMWI?rel=0&autoplay=0"
+              title="Love Video"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+    </div>
+    <div>
+      <button id="backBtn2" aria-label="Go back to previous page">Back</button>
+      <button id="nextBtn2" aria-label="Go to next page">Next</button>
+    </div>
+    <div id="closing-text">made with love, from bengi&lt;3</div>
+  </div>
 
-  <!-- Frog Doodles -->
-  <img src="1c52e24f-2c95-4079-aa9b-cbdff51958dd.jpeg" class="frogs frog-top-left" alt="frog doodle" />
-  <img src="1c52e24f-2c95-4079-aa9b-cbdff51958dd.jpeg" class="frogs frog-top-right" alt="frog doodle" />
-  <img src="1c52e24f-2c95-4079-aa9b-cbdff51958dd.jpeg" class="frogs frog-bottom-left" alt="frog doodle" />
-  <img src="1c52e24f-2c95-4079-aa9b-cbdff51958dd.jpeg" class="frogs frog-bottom-right" alt="frog doodle" />
-
-  <!-- Floating Hearts -->
-  <div class="heart-container" id="heart-container"></div>
+  <!-- Page 3 -->
+  <div id="page3" class="page" role="main" aria-label="Love message page">
+    <div id="emoji-heart-bg" aria-hidden="true">❤️</div>
+    <h3>I love you so much</h3>
+    <button id="backBtn3" aria-label="Go back to previous page">Back</button>
+  </div>
 
   <script>
-    const heartContainer = document.getElementById('heart-container');
-    const heartCount = 30;
+    const page1 = document.getElementById('page1');
+    const page2 = document.getElementById('page2');
+    const page3 = document.getElementById('page3');
 
-    for (let i = 0; i < heartCount; i++) {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = (5 + Math.random() * 7) + 's';
-      heart.style.animationDelay = (Math.random() * 12) + 's';
-      const scale = 0.7 + Math.random() * 0.6;
-      heart.style.width = 20 * scale + 'px';
-      heart.style.height = 20 * scale + 'px';
-      heartContainer.appendChild(heart);
+    const nextBtn1 = document.getElementById('nextBtn1');
+    const backBtn2 = document.getElementById('backBtn2');
+    const nextBtn2 = document.getElementById('nextBtn2');
+    const backBtn3 = document.getElementById('backBtn3');
+
+    // Function to show a page and hide others
+    function showPage(page) {
+      [page1, page2, page3].forEach(p => p.classList.remove('active'));
+      page.classList.add('active');
+      window.scrollTo(0, 0);
     }
-  </script>
 
-</body>
-</html>
+    nextBtn1.addEventListener('click', () => showPage(page2));
+    backBtn2.addEventListener('click', () => showPage(page1));
+    nextBtn2.addEventListener('click', () => showPage(page3));
+    backBtn
+::contentReference[oaicite:0]{index=0}
+ 
