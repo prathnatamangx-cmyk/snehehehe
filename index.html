@@ -29,18 +29,33 @@
     }
 
     /* Text headings */
-    h1, h2 {
+    h1, h2, h3 {
       color: #ffee8c;
       font-weight: 700;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
       margin-bottom: 2rem;
-      font-size: 1.8rem;
       max-width: 90vw;
+      user-select: none;
+    }
+
+    h1 {
+      font-size: 1.8rem;
     }
 
     h2 {
       font-size: 1.5rem;
       margin-top: 1rem;
+    }
+
+    h3 {
+      font-size: 3.5rem;
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+      position: relative;
+      z-index: 3;
+      margin-top: 0;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+      background: transparent;
     }
 
     /* Buttons with subtle bounce */
@@ -103,162 +118,3 @@
     /* Closing text */
     #closing-text {
       margin-top: 2rem;
-      font-family: 'Covered By Your Grace', cursive;
-      color: #ffee8c;
-      font-weight: 700;
-      font-size: 1.6rem;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
-      max-width: 90vw;
-      user-select: none;
-    }
-
-    /* Floating hearts container */
-    #floating-container {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      overflow: visible;
-      z-index: 1;
-    }
-
-    /* Heart SVG style */
-    .floating-heart {
-      position: fixed;
-      width: 24px;
-      height: 24px;
-      fill: #ffee8c; /* pastel yellow */
-      filter: drop-shadow(0 0 3px rgba(0,0,0,0.15));
-      opacity: 0.85;
-      user-select: none;
-      animation-timing-function: ease-in-out;
-      animation-iteration-count: infinite;
-      cursor: default;
-      will-change: transform, opacity;
-      transition: transform 0.3s ease;
-      z-index: 1;
-    }
-
-    .floating-heart:hover,
-    .floating-heart:focus,
-    .floating-heart:active {
-      transform: scale(1.4) rotate(10deg);
-      filter: drop-shadow(0 0 6px #ffb6c1);
-      opacity: 1;
-      animation-play-state: paused;
-      outline: none;
-    }
-
-    /* Floating animations with gentle sway & vertical movement */
-    @keyframes floatUpSway1 {
-      0%   { transform: translate(0, 0) rotate(0deg); opacity: 0.85; }
-      50%  { transform: translate(12px, -35px) rotate(15deg); opacity: 1; }
-      100% { transform: translate(0, 0) rotate(0deg); opacity: 0.85; }
-    }
-    @keyframes floatUpSway2 {
-      0%   { transform: translate(0, 0) rotate(0deg); opacity: 0.8; }
-      50%  { transform: translate(-10px, -40px) rotate(-10deg); opacity: 1; }
-      100% { transform: translate(0, 0) rotate(0deg); opacity: 0.8; }
-    }
-    @keyframes floatUpSway3 {
-      0%   { transform: translate(0, 0) rotate(0deg); opacity: 0.9; }
-      50%  { transform: translate(8px, -30px) rotate(8deg); opacity: 1; }
-      100% { transform: translate(0, 0) rotate(0deg); opacity: 0.9; }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Floating hearts container -->
-  <div id="floating-container" aria-hidden="true"></div>
-
-  <!-- Page 1 -->
-  <div id="page1">
-    <h1>hie meri bhondu girlfriend :)<br>here’s something cute for you</h1>
-    <button id="nextBtn">Next</button>
-  </div>
-
-  <!-- Page 2 (hidden initially) -->
-  <div id="page2" style="display:none;">
-    <h2>Click Play</h2>
-    <div class="video-container">
-      <iframe src="https://www.youtube.com/embed/P0boBJvA_SQ?rel=0&autoplay=0"
-              title="Love Video" frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen></iframe>
-    </div>
-    <button id="backBtn">Back</button>
-    <div id="closing-text">made with love, from you bengi</div>
-  </div>
-
-  <script>
-    const page1 = document.getElementById('page1');
-    const page2 = document.getElementById('page2');
-    const nextBtn = document.getElementById('nextBtn');
-    const backBtn = document.getElementById('backBtn');
-    const floatingContainer = document.getElementById('floating-container');
-
-    nextBtn.addEventListener('click', () => {
-      page1.style.display = 'none';
-      page2.style.display = 'block';
-    });
-
-    backBtn.addEventListener('click', () => {
-      page2.style.display = 'none';
-      page1.style.display = 'flex';
-    });
-
-    // SVG path for a cute heart shape
-    const heartSVG = `
-      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
-          2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09
-          C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5
-          c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-      </svg>
-    `;
-
-    // Different animation names to pick from
-    const animations = ['floatUpSway1', 'floatUpSway2', 'floatUpSway3'];
-
-    function createFloatingHeart() {
-      const div = document.createElement('div');
-      div.classList.add('floating-heart');
-      div.style.color = '#ffee8c'; // pastel yellow color
-
-      // Insert SVG inside div
-      div.innerHTML = heartSVG;
-
-      // Random horizontal start position
-      div.style.left = Math.random() * window.innerWidth + 'px';
-
-      // Random size between 14px and 28px
-      const size = 14 + Math.random() * 14;
-      div.style.width = size + 'px';
-      div.style.height = size + 'px';
-
-      // Random animation duration between 4s and 7s
-      const duration = 4000 + Math.random() * 3000;
-
-      // Random animation choice
-      const anim = animations[Math.floor(Math.random() * animations.length)];
-      div.style.animation = `${anim} ${duration}ms ease-in-out infinite`;
-
-      // Random animation delay so they float asynchronously
-      div.style.animationDelay = (Math.random() * 4000) + 'ms';
-
-      floatingContainer.appendChild(div);
-
-      // Remove heart after ~duration * 3 cycles (safety buffer)
-      setTimeout(() => {
-        floatingContainer.removeChild(div);
-      }, duration * 3);
-    }
-
-    // Generate floating hearts every 350ms
-    setInterval(createFloatingHeart, 350);
-  </script>
-
-</body>
-</html>
